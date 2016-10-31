@@ -45,4 +45,20 @@ public class ProxyServlet extends HttpServlet {
 		response.getWriter().print(strBuf);
 	}
 	
+	protected void doOptions(HttpServletRequest request, HttpServletResponse response)
+	        throws IOException {
+
+	    //The following are CORS headers. Max age informs the 
+	    //browser to keep the results of this call for 1 day.
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.setHeader("Access-Control-Allow-Methods", "GET, POST");
+		
+		//!!!IMPORTANT : Must be the same parameters that the server sent!!!!
+		response.setHeader("Access-Control-Allow-Headers", "cache-control, pragma");
+		
+		response.setHeader("Access-Control-Max-Age", "86400");
+	    //Tell the browser what requests we allow.
+		response.setHeader("Allow", "GET, HEAD, POST, TRACE, OPTIONS");
+	}
+	
 }
